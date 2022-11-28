@@ -6,21 +6,19 @@ import com.spring.project.SpringWebApp.Model.Publisher;
 import com.spring.project.SpringWebApp.Repositories.AuthorRepository;
 import com.spring.project.SpringWebApp.Repositories.BookRepository;
 import com.spring.project.SpringWebApp.Repositories.PublisherRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class BootStrapData implements CommandLineRunner{
 
-    private final AuthorRepository authorRepository;
-    private final BookRepository bookRepository;
-    private final PublisherRepository publisherRepository;
-
-    public BootStrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository) {
-        this.authorRepository = authorRepository;
-        this.bookRepository = bookRepository;
-        this.publisherRepository = publisherRepository;
-    }
+    @Autowired
+    private AuthorRepository authorRepository;
+    @Autowired
+    private BookRepository bookRepository;
+    @Autowired
+    private PublisherRepository publisherRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -49,6 +47,7 @@ public class BootStrapData implements CommandLineRunner{
 
         authorRepository.save(ajay);
         bookRepository.save(goat);
+        publisherRepository.save(john);
 
         System.out.println("started in BootStrap");
         System.out.println("Number of books: " + bookRepository.count() + "Publisher Count: " + publisherRepository.count());
